@@ -1,0 +1,1090 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{dataset1\_analyse}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{数据挖掘作业 1
+数据探索性分析与预处理}\label{ux6570ux636eux6316ux6398ux4f5cux4e1a-1-ux6570ux636eux63a2ux7d22ux6027ux5206ux6790ux4e0eux9884ux5904ux7406}
+
+\textbf{姓名：刘张敏}
+
+\textbf{学号：3220180832}
+
+\textbf{日期：2019.3.29}
+
+    \subsubsection{数据分析要求}\label{ux6570ux636eux5206ux6790ux8981ux6c42}
+
+\textbf{1. 数据可视化和摘要}
+
+数据摘要
+
+\begin{itemize}
+\item
+  对标称属性，给出每个可能取值的频数
+\item
+  对数值属性，给出最大、最小、均值、中位数、四分位数及缺失值的个数。
+\end{itemize}
+
+数据的可视化
+
+针对数值属性：
+
+\begin{itemize}
+\item
+  绘制直方图，用qq图检验其分布是否为正态分布。
+\item
+  绘制盒图，对离群值进行识别。
+\end{itemize}
+
+\textbf{2. 数据缺失的处理}
+
+观察数据集中缺失数据，分析其缺失的原因。
+
+分别使用下列四种策略对缺失值进行处理
+
+\begin{itemize}
+\tightlist
+\item
+  将缺失部分剔除
+\item
+  用最高频率值来填补缺失值
+\item
+  通过属性的相关关系来填补缺失值
+\item
+  通过数据对象之间的相似性来填补缺失值
+\end{itemize}
+
+    \subsubsection{解答内容}\label{ux89e3ux7b54ux5185ux5bb9}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+ch}{\PYZsh{}!/usr/bin/env python}
+        \PY{c+c1}{\PYZsh{} \PYZhy{}*\PYZhy{} coding:utf\PYZhy{}8 \PYZhy{}*\PYZhy{}}
+        \PY{k+kn}{import} \PY{n+nn}{operator}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{statsmodels}\PY{n+nn}{.}\PY{n+nn}{api} \PY{k}{as} \PY{n+nn}{sm}
+        \PY{k+kn}{import} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{stats} \PY{k}{as} \PY{n+nn}{stats}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}
+        \PY{n}{matplotlib}\PY{o}{.}\PY{n}{style}\PY{o}{.}\PY{n}{use}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ggplot}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{o}{\PYZpc{}}\PY{k}{pylab} inline
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Populating the interactive namespace from numpy and matplotlib
+
+    \end{Verbatim}
+
+    \textbf{Step1. 读取数据}
+
+\begin{itemize}
+\tightlist
+\item
+  读取csv文件，生成data frame
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{c+c1}{\PYZsh{} 定义两类数据：标称型和数值型}
+         \PY{n}{name\PYZus{}category} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Agency}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Location}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Area Id}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Beat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Incident Type Id}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Event Number}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{n}{name\PYZus{}value} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Priority}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} 读取数据}
+         \PY{n}{data\PYZus{}origin} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{./data\PYZus{}origin/records\PYZhy{}for\PYZhy{}2016.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                            \PY{n}{na\PYZus{}values} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{XXXXXXX}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} 将字符数据转换为category}
+         \PY{k}{for} \PY{n}{item} \PY{o+ow}{in} \PY{n}{name\PYZus{}category}\PY{p}{:}
+             \PY{n}{data\PYZus{}origin}\PY{p}{[}\PY{n}{item}\PY{p}{]} \PY{o}{=} \PY{n}{data\PYZus{}origin}\PY{p}{[}\PY{n}{item}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{category}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} 查看前10条数据内容}
+         \PY{n}{data\PYZus{}origin}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{10}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}28}]:}   Agency              Create Time             Location Area Id Beat  Priority  \textbackslash{}
+         0     OP  2016-01-01T00:00:57.000     ST\&MARKET ST          P1  05X       2.0   
+         1     OP  2016-01-01T00:01:25.000   AV\&HAMILTON ST          P3  26Y       2.0   
+         2     OP  2016-01-01T00:01:43.000   ST\&CHESTNUT ST          P1  02X       2.0   
+         3     OP  2016-01-01T00:01:48.000       WALLACE ST          P2  18Y       2.0   
+         4     OP  2016-01-01T00:02:05.000          90TH AV          P3  34X       2.0   
+         5     OP  2016-01-01T00:02:55.000        PARK BLVD          P2  16Y       2.0   
+         6     OP  2016-01-01T00:03:20.000        PIPPIN ST          P3  31Z       2.0   
+         7     OP  2016-01-01T00:03:32.000        POTTER ST          P3  27X       2.0   
+         8     OP  2016-01-01T00:04:35.000       OUTLOOK AV          P3  30Y       2.0   
+         9     OP  2016-01-01T00:04:46.000          61ST ST          P1  10X       2.0   
+         
+           Incident Type Id Incident Type Description     Event Number  \textbackslash{}
+         0            415GS              415 GUNSHOTS  LOP160101000003   
+         1            415GS              415 GUNSHOTS  LOP160101000005   
+         2            415GS              415 GUNSHOTS  LOP160101000008   
+         3            415GS              415 GUNSHOTS  LOP160101000007   
+         4            415GS              415 GUNSHOTS  LOP160101000009   
+         5              314         INDECENT EXPOSURE  LOP160101000010   
+         6            415GS              415 GUNSHOTS  LOP160101000011   
+         7            415FC         415 FIRE CRACKERS  LOP160101000012   
+         8             933R              ALARM-RINGER  LOP160101000014   
+         9            415FC         415 FIRE CRACKERS  LOP160101000017   
+         
+                        Closed Time  
+         0  2016-01-01T00:32:30.000  
+         1  2016-01-01T00:48:23.000  
+         2  2016-01-01T00:21:24.000  
+         3  2016-01-01T01:15:03.000  
+         4  2016-01-01T00:54:52.000  
+         5  2016-01-01T01:53:59.000  
+         6  2016-01-01T01:11:59.000  
+         7  2016-01-01T01:43:12.000  
+         8  2016-01-01T00:11:13.000  
+         9  2016-01-01T00:53:39.000  
+\end{Verbatim}
+            
+    \textbf{Step 2. 数据摘要}
+
+\begin{itemize}
+\tightlist
+\item
+  对标称属性，给出每个可能取值的频数
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{c+c1}{\PYZsh{} 使用value\PYZus{}counts函数统计每个标称属性的取值频数}
+         \PY{k}{for} \PY{n}{item} \PY{o+ow}{in} \PY{n}{name\PYZus{}category}\PY{p}{:}
+             \PY{n+nb}{print} \PY{p}{(}\PY{n}{item} \PY{o}{+} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{的频数为：}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)} 
+             \PY{n+nb}{print} \PY{p}{(}\PY{n}{pd}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{n}{data\PYZus{}origin}\PY{p}{[}\PY{n}{item}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Agency的频数为：
+
+OP    110827
+dtype: int64
+Location的频数为：
+
+ INTERNATIONAL BLVD                  2156
+ AV\&INTERNATIONAL BLVD               1829
+ MACARTHUR BLVD                      1813
+ BROADWAY                            1472
+ 7TH ST                              1223
+ FOOTHILL BLVD                       1052
+ TELEGRAPH AV                         875
+ SAN PABLO AV                         765
+ AV\&MACARTHUR BLVD                    737
+ FRUITVALE AV                         709
+ BANCROFT AV                          707
+ ST\&BROADWAY                          691
+ HIGH ST                              678
+ ST\&TELEGRAPH AV                      638
+ 73RD AV                              595
+ HEGENBERGER RD                       591
+ AV\&FOOTHILL BLVD                     554
+ LAKESHORE AV                         509
+ WEBSTER ST                           465
+ E 12TH ST                            455
+ AV\&BANCROFT AV                       440
+ HARRISON ST                          436
+ ST\&MARKET ST                         427
+ GRAND AV                             416
+ MARKET ST                            414
+ 35TH AV                              408
+ 14TH ST                              401
+ ST\&MARTIN LUTHER KING JR WY          401
+ 34TH ST                              371
+ ST\&SAN PABLO AV                      363
+                                     {\ldots} 
+94TH 12TH AV                            1
+94TH 13TH AV                            1
+94TH 16TH AV                            1
+94TH 23RD ST\&INYO AV                    1
+94TH 28TH AV                            1
+94TH 32ND ST                            1
+94TH 33RD AV                            1
+94TH 33RD ST\&PARK BLVD                  1
+93RD E 17TH ST                          1
+93RD AV\&SAN LEANDRO ST                  1
+93RD AV\&CHURCH ST                       1
+93RD AV\&BANCROFT AV                     1
+92ND ST\&LINCOLN AV                      1
+92ND ST\&MADISON ST                      1
+92ND ST\&MARKET ST                       1
+92ND ST\&MARTIN LUTHER KING JR WY        1
+92ND ST\&VAN BUREN AV                    1
+92ND SYCAMORE ST                        1
+92ND TELEGRAPH AV                       1
+92ND TERRACE                            1
+92ND VICTOR AV                          1
+92ND W GRAND AV                         1
+92ND WAKEFIELD AV                       1
+92ND WALNUT ST                          1
+934A MARTIN LUTHER KING JR WY           1
+93RD 105TH AV                           1
+93RD 40TH STREET WY                     1
+93RD 41ST AV                            1
+93RD 66TH AV                            1
+62ND BARTLETT ST                        1
+Length: 24046, dtype: int64
+Area Id的频数为：
+
+P3     47425
+P1     41419
+P2     19610
+POU     2173
+PCW      194
+TEC        4
+WAG        1
+JLS        1
+dtype: int64
+Beat的频数为：
+
+04X     4515
+08X     3931
+26Y     3511
+30Y     3473
+19X     3455
+30X     3416
+03X     3195
+23X     3076
+34X     2857
+07X     2831
+20X     2702
+29X     2646
+06X     2580
+03Y     2562
+27Y     2517
+25X     2467
+31Y     2460
+27X     2333
+35X     2328
+32X     2316
+33X     2276
+09X     2158
+21Y     2100
+32Y     2093
+12Y     1987
+14X     1832
+26X     1766
+02X     1746
+24X     1704
+02Y     1659
+10Y     1573
+10X     1557
+22X     1541
+17Y     1482
+21X     1479
+24Y     1454
+31X     1439
+22Y     1420
+13Z     1397
+15X     1393
+05X     1342
+01X     1304
+12X     1299
+31Z     1268
+28X     1261
+11X     1208
+35Y     1159
+18Y     1102
+14Y     1027
+17X      969
+13Y      952
+16Y      907
+25Y      739
+18X      721
+16X      708
+13X      630
+05Y      408
+PDT2      16
+dtype: int64
+Incident Type Id的频数为：
+
+933R      10094
+415        7883
+SECCK      7251
+10851      5308
+911H       5089
+5150       4859
+415C       3701
+242        3483
+912        2583
+949        2504
+HAZ        2424
+243E       2310
+WELCK      2276
+415GS      2025
+901A       1730
+602L       1690
+211        1592
+415TH      1458
+943        1288
+415N       1287
+245        1286
+975        1159
+415CU      1084
+20002      1071
+933MA      1061
+601R       1024
+901        1020
+EVAL       1011
+CODE7       975
+597         810
+          {\ldots}  
+11351         3
+148\_5A        3
+962           3
+182           3
+243           3
+21235V        3
+529           3
+203           3
+10852         2
+140           2
+10801         2
+WIT           2
+SUSPS         2
+484G          2
+503           2
+591           2
+626\_6         2
+A487          1
+OTC           1
+EBMUD         1
+DROWN         1
+ABC           1
+243A          1
+970A          1
+955B          1
+300WI         1
+487E          1
+407           1
+3211H         1
+YELALT        1
+Length: 242, dtype: int64
+Event Number的频数为：
+
+LOP160731000897    1
+LOP160315000161    1
+LOP160315000126    1
+LOP160315000130    1
+LOP160315000135    1
+LOP160315000139    1
+LOP160315000140    1
+LOP160315000147    1
+LOP160315000152    1
+LOP160315000154    1
+LOP160315000156    1
+LOP160315000157    1
+LOP160315000158    1
+LOP160315000166    1
+LOP160314001004    1
+LOP160315000167    1
+LOP160315000169    1
+LOP160315000172    1
+LOP160315000174    1
+LOP160315000177    1
+LOP160315000178    1
+LOP160315000181    1
+LOP160315000182    1
+LOP160315000184    1
+LOP160315000186    1
+LOP160315000187    1
+LOP160315000125    1
+LOP160315000124    1
+LOP160315000123    1
+LOP160315000122    1
+                  ..
+LOP160523000540    1
+LOP160523000541    1
+LOP160523000480    1
+LOP160523000477    1
+LOP160523000428    1
+LOP160523000476    1
+LOP160523000429    1
+LOP160523000430    1
+LOP160523000432    1
+LOP160523000434    1
+LOP160523000437    1
+LOP160523000439    1
+LOP160523000441    1
+LOP160523000443    1
+LOP160523000445    1
+LOP160523000447    1
+LOP160523000448    1
+LOP160523000449    1
+LOP160523000451    1
+LOP160523000452    1
+LOP160523000458    1
+LOP160523000459    1
+LOP160523000464    1
+LOP160523000465    1
+LOP160523000467    1
+LOP160523000469    1
+LOP160523000470    1
+LOP160523000472    1
+LOP160523000473    1
+LOP160101000003    1
+Length: 110827, dtype: int64
+
+    \end{Verbatim}
+
+    \begin{itemize}
+\tightlist
+\item
+  对数值属性，给出最大、最小、均值、中位数、四分位数及缺失值的个数。
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{c+c1}{\PYZsh{} 最大值}
+         \PY{n}{data\PYZus{}show} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{data} \PY{o}{=} \PY{n}{data\PYZus{}origin}\PY{p}{[}\PY{n}{name\PYZus{}value}\PY{p}{]}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{max}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} 最小值}
+         \PY{n}{data\PYZus{}show}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{min}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{data\PYZus{}origin}\PY{p}{[}\PY{n}{name\PYZus{}value}\PY{p}{]}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} 均值}
+         \PY{n}{data\PYZus{}show}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{mean}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{data\PYZus{}origin}\PY{p}{[}\PY{n}{name\PYZus{}value}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} 中位数}
+         \PY{n}{data\PYZus{}show}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{median}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{data\PYZus{}origin}\PY{p}{[}\PY{n}{name\PYZus{}value}\PY{p}{]}\PY{o}{.}\PY{n}{median}\PY{p}{(}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} 四分位数}
+         \PY{n}{data\PYZus{}show}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{quartile}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{data\PYZus{}origin}\PY{p}{[}\PY{n}{name\PYZus{}value}\PY{p}{]}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{25}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{c+c1}{\PYZsh{} 缺失值个数}
+         \PY{n}{data\PYZus{}show}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{missing}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{data\PYZus{}origin}\PY{p}{[}\PY{n}{name\PYZus{}value}\PY{p}{]}\PY{o}{.}\PY{n}{describe}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x} \PY{p}{:} \PY{l+m+mi}{200}\PY{o}{\PYZhy{}}\PY{n}{x}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{n}{data\PYZus{}show}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}34}]:}           max  min      mean  median  quartile   missing
+         Priority  2.0  1.0  1.778438     2.0       2.0 -110627.0
+\end{Verbatim}
+            
+    \textbf{Step 3. 数据可视化 }
+
+\begin{itemize}
+\tightlist
+\item
+  针对数值属性： 绘制直方图，用qq图检验其分布是否为正态分布。
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{c+c1}{\PYZsh{} 直方图}
+         \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{11}\PY{p}{)}\PY{p}{)}
+         \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{1}
+         \PY{k}{for} \PY{n}{item} \PY{o+ow}{in} \PY{n}{name\PYZus{}value}\PY{p}{:}
+             \PY{n}{ax} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{n}{i}\PY{p}{)}
+             \PY{n}{data\PYZus{}origin}\PY{p}{[}\PY{n}{item}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{hist}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{title} \PY{o}{=} \PY{n}{item}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{ax}\PY{p}{)}
+             \PY{n}{i} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplots\PYZus{}adjust}\PY{p}{(}\PY{n}{wspace} \PY{o}{=} \PY{l+m+mf}{0.3}\PY{p}{,} \PY{n}{hspace} \PY{o}{=} \PY{l+m+mf}{0.3}\PY{p}{)}
+         \PY{n}{fig}\PY{o}{.}\PY{n}{savefig}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./image/histogram.jpg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_12_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{c+c1}{\PYZsh{} qq图}
+         \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{12}\PY{p}{)}\PY{p}{)}
+         \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{1}
+         \PY{k}{for} \PY{n}{item} \PY{o+ow}{in} \PY{n}{name\PYZus{}value}\PY{p}{:}
+             \PY{n}{ax} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{n}{i}\PY{p}{)}
+             \PY{n}{sm}\PY{o}{.}\PY{n}{qqplot}\PY{p}{(}\PY{n}{data\PYZus{}origin}\PY{p}{[}\PY{n}{item}\PY{p}{]}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{ax}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{n}{item}\PY{p}{)}
+             \PY{n}{i} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplots\PYZus{}adjust}\PY{p}{(}\PY{n}{wspace} \PY{o}{=} \PY{l+m+mf}{0.3}\PY{p}{,} \PY{n}{hspace} \PY{o}{=} \PY{l+m+mf}{0.3}\PY{p}{)}
+         \PY{n}{fig}\PY{o}{.}\PY{n}{savefig}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./image/qqplot.jpg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_13_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    从qq图中可以看出，只有mxPH和mnO2两项值符合正态分布，其他值均不符合
+
+    \begin{itemize}
+\tightlist
+\item
+  绘制盒图，对离群值进行识别。
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{c+c1}{\PYZsh{} 盒图}
+         \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{12}\PY{p}{)}\PY{p}{)}
+         \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{1}
+         \PY{k}{for} \PY{n}{item} \PY{o+ow}{in} \PY{n}{name\PYZus{}value}\PY{p}{:}
+             \PY{n}{ax} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{n}{i}\PY{p}{)}
+             \PY{n}{data\PYZus{}origin}\PY{p}{[}\PY{n}{item}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{box}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{i} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+         \PY{n}{fig}\PY{o}{.}\PY{n}{savefig}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./image/boxplot.jpg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_16_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \textbf{Step 4. 数据缺失的处理}
+
+可视化方法：对于\textbf{标称属性}，绘制属性的折线图，图中红线是原始数据，蓝线是处理完缺失值之后的数据；\textbf{数值属性}：使用直方图，将原始数据和处理后的数据图像进行叠加。图中红色的垂线是原始数据的均值，蓝色的垂线是处理完缺失值之后的均值。
+
+    4.0 观察数据
+
+从绘制的表格上可以看出，缺失值主要集中在Beat个属性，第238条数据缺失情况比较严重
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{c+c1}{\PYZsh{} 找出含有缺失值的数据条目索引值}
+         \PY{n}{nan\PYZus{}list} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{n}{data\PYZus{}origin}\PY{p}{)}\PY{o}{.}\PY{n}{any}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{.}\PY{n}{nonzero}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} 显示含有缺失值的原始数据条目}
+         \PY{n}{data\PYZus{}origin}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{n}{nan\PYZus{}list}\PY{p}{]}\PY{o}{.}\PY{n}{style}\PY{o}{.}\PY{n}{highlight\PYZus{}null}\PY{p}{(}\PY{n}{null\PYZus{}color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}38}]:} <pandas.io.formats.style.Styler at 0x1adf104a7f0>
+\end{Verbatim}
+            
+    4.1 将缺失部分剔除
+
+使用\textbf{\emph{dropna()}}函数操作。从结果可以看出，由于删除了带有缺失值的整条数据。
+
+从标称属性的折线图，可以明显看出处理后的数据量减少；直方图中，蓝色线和红色线不重合，但是十分接近，说明数值属性的均值有改变，但是变化不大。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{c+c1}{\PYZsh{} 将缺失值对应的数据整条剔除，生成新数据集}
+         \PY{n}{data\PYZus{}filtrated} \PY{o}{=} \PY{n}{data\PYZus{}origin}\PY{o}{.}\PY{n}{dropna}\PY{p}{(}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} 绘制可视化图}
+         \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{15}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{1}
+         \PY{c+c1}{\PYZsh{} 对标称属性，绘制折线图}
+         \PY{k}{for} \PY{n}{item} \PY{o+ow}{in} \PY{n}{name\PYZus{}category}\PY{p}{:}
+             \PY{n}{ax} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{n}{i}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{n}{item}\PY{p}{)}
+             \PY{n}{pd}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{n}{data\PYZus{}origin}\PY{p}{[}\PY{n}{item}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{)}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{ax} \PY{o}{=} \PY{n}{ax}\PY{p}{,} \PY{n}{marker} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZca{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{origin}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{legend} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+             \PY{n}{pd}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{n}{data\PYZus{}filtrated}\PY{p}{[}\PY{n}{item}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{)}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{ax} \PY{o}{=} \PY{n}{ax}\PY{p}{,} \PY{n}{marker} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{o}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{filtrated}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{legend} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+             \PY{n}{i} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+         
+         \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{6}
+         \PY{c+c1}{\PYZsh{} 对数值属性，绘制直方图}
+         \PY{k}{for} \PY{n}{item} \PY{o+ow}{in} \PY{n}{name\PYZus{}value}\PY{p}{:}
+             \PY{n}{ax} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{n}{i}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{n}{item}\PY{p}{)}
+             \PY{n}{data\PYZus{}origin}\PY{p}{[}\PY{n}{item}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{ax} \PY{o}{=} \PY{n}{ax}\PY{p}{,} \PY{n}{alpha} \PY{o}{=} \PY{l+m+mf}{0.5}\PY{p}{,} \PY{n}{kind} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{hist}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{origin}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{legend} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+             \PY{n}{data\PYZus{}filtrated}\PY{p}{[}\PY{n}{item}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{ax} \PY{o}{=} \PY{n}{ax}\PY{p}{,} \PY{n}{alpha} \PY{o}{=} \PY{l+m+mf}{0.5}\PY{p}{,} \PY{n}{kind} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{hist}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{filtrated}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{legend} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{axvline}\PY{p}{(}\PY{n}{data\PYZus{}origin}\PY{p}{[}\PY{n}{item}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{color} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{axvline}\PY{p}{(}\PY{n}{data\PYZus{}filtrated}\PY{p}{[}\PY{n}{item}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{color} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{i} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplots\PYZus{}adjust}\PY{p}{(}\PY{n}{wspace} \PY{o}{=} \PY{l+m+mf}{0.3}\PY{p}{,} \PY{n}{hspace} \PY{o}{=} \PY{l+m+mf}{0.3}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} 保存图像和处理后数据}
+         \PY{n}{fig}\PY{o}{.}\PY{n}{savefig}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./image/missing\PYZus{}data\PYZus{}delete.jpg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{data\PYZus{}filtrated}\PY{o}{.}\PY{n}{to\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./data\PYZus{}output/missing\PYZus{}data\PYZus{}delete.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{mode} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{w}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{encoding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{utf\PYZhy{}8}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{index} \PY{o}{=} \PY{k+kc}{False}\PY{p}{,}\PY{n}{header} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+C:\textbackslash{}Users\textbackslash{}Adminstrator\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}matplotlib\textbackslash{}cbook\textbackslash{}deprecation.py:107: MatplotlibDeprecationWarning: Adding an axes using the same arguments as a previous axes currently reuses the earlier instance.  In a future version, a new instance will always be created and returned.  Meanwhile, this warning can be suppressed, and the future behavior ensured, by passing a unique label to each axes instance.
+  warnings.warn(message, mplDeprecation, stacklevel=1)
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_21_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    4.2 用最高频率值来填补缺失值
+
+使用\textbf{\emph{value\_counts()}}函数统计原始数据中，出现频率最高的值，再用\textbf{\emph{fillna()}}函数将缺失值替换为最高频率值。
+
+从折线图看出，处理后标称属性值不变；从直方图可以看出，数值属性的缺失值补全为高频值，均值基本保持不变。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} \PY{c+c1}{\PYZsh{} 建立原始数据的拷贝}
+         \PY{n}{data\PYZus{}filtrated} \PY{o}{=} \PY{n}{data\PYZus{}origin}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} 对每一列数据，分别进行处理}
+         \PY{k}{for} \PY{n}{item} \PY{o+ow}{in} \PY{n}{name\PYZus{}category}\PY{o}{+}\PY{n}{name\PYZus{}value}\PY{p}{:}
+             \PY{c+c1}{\PYZsh{} 计算最高频率的值}
+             \PY{n}{most\PYZus{}frequent\PYZus{}value} \PY{o}{=} \PY{n}{data\PYZus{}filtrated}\PY{p}{[}\PY{n}{item}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{idxmax}\PY{p}{(}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{} 替换缺失值}
+             \PY{n}{data\PYZus{}filtrated}\PY{p}{[}\PY{n}{item}\PY{p}{]}\PY{o}{.}\PY{n}{fillna}\PY{p}{(}\PY{n}{value} \PY{o}{=} \PY{n}{most\PYZus{}frequent\PYZus{}value}\PY{p}{,} \PY{n}{inplace} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} 绘制可视化图}
+         \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{15}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{1}
+         \PY{c+c1}{\PYZsh{} 对标称属性，绘制折线图}
+         \PY{k}{for} \PY{n}{item} \PY{o+ow}{in} \PY{n}{name\PYZus{}category}\PY{p}{:}
+             \PY{n}{ax} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{n}{i}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{n}{item}\PY{p}{)}
+             \PY{n}{pd}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{n}{data\PYZus{}origin}\PY{p}{[}\PY{n}{item}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{)}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{ax} \PY{o}{=} \PY{n}{ax}\PY{p}{,} \PY{n}{marker} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZca{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{origin}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{legend} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+             \PY{n}{pd}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{n}{data\PYZus{}filtrated}\PY{p}{[}\PY{n}{item}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{)}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{ax} \PY{o}{=} \PY{n}{ax}\PY{p}{,} \PY{n}{marker} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{o}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{filtrated}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{legend} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+             \PY{n}{i} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}    
+         
+         \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{6}
+         \PY{c+c1}{\PYZsh{} 对数值属性，绘制直方图}
+         \PY{k}{for} \PY{n}{item} \PY{o+ow}{in} \PY{n}{name\PYZus{}value}\PY{p}{:}
+             \PY{n}{ax} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{n}{i}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{n}{item}\PY{p}{)}
+             \PY{n}{data\PYZus{}origin}\PY{p}{[}\PY{n}{item}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{ax} \PY{o}{=} \PY{n}{ax}\PY{p}{,} \PY{n}{alpha} \PY{o}{=} \PY{l+m+mf}{0.5}\PY{p}{,} \PY{n}{kind} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{hist}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{origin}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{legend} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+             \PY{n}{data\PYZus{}filtrated}\PY{p}{[}\PY{n}{item}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{ax} \PY{o}{=} \PY{n}{ax}\PY{p}{,} \PY{n}{alpha} \PY{o}{=} \PY{l+m+mf}{0.5}\PY{p}{,} \PY{n}{kind} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{hist}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{droped}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{legend} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{axvline}\PY{p}{(}\PY{n}{data\PYZus{}origin}\PY{p}{[}\PY{n}{item}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{color} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{axvline}\PY{p}{(}\PY{n}{data\PYZus{}filtrated}\PY{p}{[}\PY{n}{item}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{color} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{i} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplots\PYZus{}adjust}\PY{p}{(}\PY{n}{wspace} \PY{o}{=} \PY{l+m+mf}{0.3}\PY{p}{,} \PY{n}{hspace} \PY{o}{=} \PY{l+m+mf}{0.3}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} 保存图像和处理后数据}
+         \PY{n}{fig}\PY{o}{.}\PY{n}{savefig}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./image/missing\PYZus{}data\PYZus{}most.jpg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{data\PYZus{}filtrated}\PY{o}{.}\PY{n}{to\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./data\PYZus{}output/missing\PYZus{}data\PYZus{}most.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{mode} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{w}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{encoding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{utf\PYZhy{}8}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{index} \PY{o}{=} \PY{k+kc}{False}\PY{p}{,}\PY{n}{header} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+C:\textbackslash{}Users\textbackslash{}Adminstrator\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}matplotlib\textbackslash{}cbook\textbackslash{}deprecation.py:107: MatplotlibDeprecationWarning: Adding an axes using the same arguments as a previous axes currently reuses the earlier instance.  In a future version, a new instance will always be created and returned.  Meanwhile, this warning can be suppressed, and the future behavior ensured, by passing a unique label to each axes instance.
+  warnings.warn(message, mplDeprecation, stacklevel=1)
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_23_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    4.3 通过属性的相关关系来填补缺失值
+
+使用pandas中Series的\textbf{\emph{interpolate()}}函数，对数值属性进行插值计算，并替换缺失值。
+
+从直方图中可以看出，处理后的数据，添加了若干个值不同的值，并且均值变化不大。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}41}]:} \PY{c+c1}{\PYZsh{} 建立原始数据的拷贝}
+         \PY{n}{data\PYZus{}filtrated} \PY{o}{=} \PY{n}{data\PYZus{}origin}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} 对数值型属性的每一列，进行插值运算}
+         \PY{k}{for} \PY{n}{item} \PY{o+ow}{in} \PY{n}{name\PYZus{}value}\PY{p}{:}
+             \PY{n}{data\PYZus{}filtrated}\PY{p}{[}\PY{n}{item}\PY{p}{]}\PY{o}{.}\PY{n}{interpolate}\PY{p}{(}\PY{n}{inplace} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} 绘制可视化图}
+         \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{15}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{1}
+         \PY{c+c1}{\PYZsh{} 对标称属性，绘制折线图}
+         \PY{k}{for} \PY{n}{item} \PY{o+ow}{in} \PY{n}{name\PYZus{}category}\PY{p}{:}
+             \PY{n}{ax} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{n}{i}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{n}{item}\PY{p}{)}
+             \PY{n}{pd}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{n}{data\PYZus{}origin}\PY{p}{[}\PY{n}{item}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{)}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{ax} \PY{o}{=} \PY{n}{ax}\PY{p}{,} \PY{n}{marker} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZca{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{origin}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{legend} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+             \PY{n}{pd}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{n}{data\PYZus{}filtrated}\PY{p}{[}\PY{n}{item}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{)}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{ax} \PY{o}{=} \PY{n}{ax}\PY{p}{,} \PY{n}{marker} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{o}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{filtrated}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{legend} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+             \PY{n}{i} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}   
+             
+         \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{6}
+         \PY{c+c1}{\PYZsh{} 对数值属性，绘制直方图}
+         \PY{k}{for} \PY{n}{item} \PY{o+ow}{in} \PY{n}{name\PYZus{}value}\PY{p}{:}
+             \PY{n}{ax} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{n}{i}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{n}{item}\PY{p}{)}
+             \PY{n}{data\PYZus{}origin}\PY{p}{[}\PY{n}{item}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{ax} \PY{o}{=} \PY{n}{ax}\PY{p}{,} \PY{n}{alpha} \PY{o}{=} \PY{l+m+mf}{0.5}\PY{p}{,} \PY{n}{kind} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{hist}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{origin}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{legend} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+             \PY{n}{data\PYZus{}filtrated}\PY{p}{[}\PY{n}{item}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{ax} \PY{o}{=} \PY{n}{ax}\PY{p}{,} \PY{n}{alpha} \PY{o}{=} \PY{l+m+mf}{0.5}\PY{p}{,} \PY{n}{kind} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{hist}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{droped}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{legend} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{axvline}\PY{p}{(}\PY{n}{data\PYZus{}origin}\PY{p}{[}\PY{n}{item}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{color} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{axvline}\PY{p}{(}\PY{n}{data\PYZus{}filtrated}\PY{p}{[}\PY{n}{item}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{color} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{i} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplots\PYZus{}adjust}\PY{p}{(}\PY{n}{wspace} \PY{o}{=} \PY{l+m+mf}{0.3}\PY{p}{,} \PY{n}{hspace} \PY{o}{=} \PY{l+m+mf}{0.3}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} 保存图像和处理后数据}
+         \PY{n}{fig}\PY{o}{.}\PY{n}{savefig}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./image/missing\PYZus{}data\PYZus{}corelation.jpg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{data\PYZus{}filtrated}\PY{o}{.}\PY{n}{to\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./data\PYZus{}output/missing\PYZus{}data\PYZus{}corelation.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{mode} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{w}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{encoding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{utf\PYZhy{}8}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{index} \PY{o}{=} \PY{k+kc}{False}\PY{p}{,}\PY{n}{header} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+C:\textbackslash{}Users\textbackslash{}Adminstrator\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}matplotlib\textbackslash{}cbook\textbackslash{}deprecation.py:107: MatplotlibDeprecationWarning: Adding an axes using the same arguments as a previous axes currently reuses the earlier instance.  In a future version, a new instance will always be created and returned.  Meanwhile, this warning can be suppressed, and the future behavior ensured, by passing a unique label to each axes instance.
+  warnings.warn(message, mplDeprecation, stacklevel=1)
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_25_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    4.4 通过数据对象之间的相似性来填补缺失值
+
+首先将缺失值设为0，对数据集进行正则化。然后对每两条数据进行差异性计算（分值越高差异性越大）。计算标准为：标称数据不相同记为1分，数值数据差异性分数为数据之间的差值。在处理缺失值时，找到和该条数据对象差异性最小（分数最低）的对象，将最相似的数据条目中对应属性的值替换缺失值。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}43}]:} \PY{c+c1}{\PYZsh{} 建立原始数据的拷贝，用于正则化处理}
+         \PY{n}{data\PYZus{}norm} \PY{o}{=} \PY{n}{data\PYZus{}origin}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} 将数值属性的缺失值替换为0}
+         \PY{n}{data\PYZus{}norm}\PY{p}{[}\PY{n}{name\PYZus{}value}\PY{p}{]} \PY{o}{=} \PY{n}{data\PYZus{}norm}\PY{p}{[}\PY{n}{name\PYZus{}value}\PY{p}{]}\PY{o}{.}\PY{n}{fillna}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} 对数据进行正则化}
+         \PY{n}{data\PYZus{}norm}\PY{p}{[}\PY{n}{name\PYZus{}value}\PY{p}{]} \PY{o}{=} \PY{n}{data\PYZus{}norm}\PY{p}{[}\PY{n}{name\PYZus{}value}\PY{p}{]}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x} \PY{p}{:} \PY{p}{(}\PY{n}{x} \PY{o}{\PYZhy{}} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)} \PY{o}{/} \PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{x}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{np}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} 构造分数表}
+         \PY{n}{score} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+         \PY{n}{range\PYZus{}length} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{data\PYZus{}origin}\PY{p}{)}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{range\PYZus{}length}\PY{p}{)}\PY{p}{:}
+             \PY{n}{score}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{p}{\PYZob{}}\PY{p}{\PYZcb{}}
+             \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{range\PYZus{}length}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{score}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{j}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0}    
+         
+         \PY{c+c1}{\PYZsh{} 在处理后的数据中，对每两条数据条目计算差异性得分，分值越高差异性越大}
+         \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{range\PYZus{}length}\PY{p}{)}\PY{p}{:}
+             \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{i}\PY{p}{,} \PY{n}{range\PYZus{}length}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{for} \PY{n}{item} \PY{o+ow}{in} \PY{n}{name\PYZus{}category}\PY{p}{:}
+                     \PY{k}{if} \PY{n}{data\PYZus{}norm}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{item}\PY{p}{]} \PY{o}{!=} \PY{n}{data\PYZus{}norm}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{[}\PY{n}{item}\PY{p}{]}\PY{p}{:}
+                         \PY{n}{score}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{j}\PY{p}{]} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                 \PY{k}{for} \PY{n}{item} \PY{o+ow}{in} \PY{n}{name\PYZus{}value}\PY{p}{:}
+                     \PY{n}{temp} \PY{o}{=} \PY{n+nb}{abs}\PY{p}{(}\PY{n}{data\PYZus{}norm}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{item}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{data\PYZus{}norm}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{[}\PY{n}{item}\PY{p}{]}\PY{p}{)}
+                     \PY{n}{score}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{j}\PY{p}{]} \PY{o}{+}\PY{o}{=} \PY{n}{temp}
+                 \PY{n}{score}\PY{p}{[}\PY{n}{j}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{score}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{n}{j}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} 建立原始数据的拷贝}
+         \PY{n}{data\PYZus{}filtrated} \PY{o}{=} \PY{n}{data\PYZus{}origin}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} 对有缺失值的条目，用和它相似度最高（得分最低）的数据条目中对应属性的值替换}
+         \PY{k}{for} \PY{n}{index} \PY{o+ow}{in} \PY{n}{nan\PYZus{}list}\PY{p}{:}
+             \PY{n}{best\PYZus{}friend} \PY{o}{=} \PY{n+nb}{sorted}\PY{p}{(}\PY{n}{score}\PY{p}{[}\PY{n}{index}\PY{p}{]}\PY{o}{.}\PY{n}{items}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{key}\PY{o}{=}\PY{n}{operator}\PY{o}{.}\PY{n}{itemgetter}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n}{reverse} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+             \PY{k}{for} \PY{n}{item} \PY{o+ow}{in} \PY{n}{name\PYZus{}value}\PY{p}{:}
+                 \PY{k}{if} \PY{n}{pd}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{n}{data\PYZus{}filtrated}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{n}{index}\PY{p}{]}\PY{p}{[}\PY{n}{item}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                     \PY{k}{if} \PY{n}{pd}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{n}{data\PYZus{}origin}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{n}{best\PYZus{}friend}\PY{p}{]}\PY{p}{[}\PY{n}{item}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+                         \PY{n}{data\PYZus{}filtrated}\PY{o}{.}\PY{n}{ix}\PY{p}{[}\PY{n}{index}\PY{p}{,} \PY{n}{item}\PY{p}{]} \PY{o}{=} \PY{n}{data\PYZus{}origin}\PY{p}{[}\PY{n}{item}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{idxmax}\PY{p}{(}\PY{p}{)}
+                     \PY{k}{else}\PY{p}{:}
+                         \PY{n}{data\PYZus{}filtrated}\PY{o}{.}\PY{n}{ix}\PY{p}{[}\PY{n}{index}\PY{p}{,} \PY{n}{item}\PY{p}{]} \PY{o}{=} \PY{n}{data\PYZus{}origin}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{n}{best\PYZus{}friend}\PY{p}{]}\PY{p}{[}\PY{n}{item}\PY{p}{]}
+         
+         \PY{c+c1}{\PYZsh{} 绘制可视化图}
+         \PY{n}{fig} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{15}\PY{p}{)}\PY{p}{)}
+         
+         \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{1}
+         \PY{c+c1}{\PYZsh{} 对标称属性，绘制折线图}
+         \PY{k}{for} \PY{n}{item} \PY{o+ow}{in} \PY{n}{name\PYZus{}category}\PY{p}{:}
+             \PY{n}{ax} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{n}{i}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{n}{item}\PY{p}{)}
+             \PY{n}{pd}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{n}{data\PYZus{}origin}\PY{p}{[}\PY{n}{item}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{)}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{ax} \PY{o}{=} \PY{n}{ax}\PY{p}{,} \PY{n}{marker} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZca{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{origin}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{legend} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+             \PY{n}{pd}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{n}{data\PYZus{}filtrated}\PY{p}{[}\PY{n}{item}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{)}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{ax} \PY{o}{=} \PY{n}{ax}\PY{p}{,} \PY{n}{marker} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{o}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{filtrated}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{legend} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+             \PY{n}{i} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}   
+             
+         \PY{n}{i} \PY{o}{=} \PY{l+m+mi}{6}
+         \PY{c+c1}{\PYZsh{} 对数值属性，绘制直方图}
+         \PY{k}{for} \PY{n}{item} \PY{o+ow}{in} \PY{n}{name\PYZus{}value}\PY{p}{:}
+             \PY{n}{ax} \PY{o}{=} \PY{n}{fig}\PY{o}{.}\PY{n}{add\PYZus{}subplot}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{n}{i}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}title}\PY{p}{(}\PY{n}{item}\PY{p}{)}
+             \PY{n}{data\PYZus{}origin}\PY{p}{[}\PY{n}{item}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{ax} \PY{o}{=} \PY{n}{ax}\PY{p}{,} \PY{n}{alpha} \PY{o}{=} \PY{l+m+mf}{0.5}\PY{p}{,} \PY{n}{kind} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{hist}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{origin}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{legend} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+             \PY{n}{data\PYZus{}filtrated}\PY{p}{[}\PY{n}{item}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{ax} \PY{o}{=} \PY{n}{ax}\PY{p}{,} \PY{n}{alpha} \PY{o}{=} \PY{l+m+mf}{0.5}\PY{p}{,} \PY{n}{kind} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{hist}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{droped}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{legend} \PY{o}{=} \PY{k+kc}{True}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{axvline}\PY{p}{(}\PY{n}{data\PYZus{}origin}\PY{p}{[}\PY{n}{item}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{color} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{ax}\PY{o}{.}\PY{n}{axvline}\PY{p}{(}\PY{n}{data\PYZus{}filtrated}\PY{p}{[}\PY{n}{item}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{color} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+             \PY{n}{i} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{subplots\PYZus{}adjust}\PY{p}{(}\PY{n}{wspace} \PY{o}{=} \PY{l+m+mf}{0.3}\PY{p}{,} \PY{n}{hspace} \PY{o}{=} \PY{l+m+mf}{0.3}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} 保存图像和处理后数据}
+         \PY{n}{fig}\PY{o}{.}\PY{n}{savefig}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./image/missing\PYZus{}data\PYZus{}similarity.jpg}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{data\PYZus{}filtrated}\PY{o}{.}\PY{n}{to\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./data\PYZus{}output/missing\PYZus{}data\PYZus{}similarity.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{mode} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{w}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{encoding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{utf\PYZhy{}8}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{index} \PY{o}{=} \PY{k+kc}{False}\PY{p}{,}\PY{n}{header} \PY{o}{=} \PY{k+kc}{False}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+        ---------------------------------------------------------------------------
+
+        MemoryError                               Traceback (most recent call last)
+
+        <ipython-input-43-703fc2eb94f1> in <module>()
+         12     score[i] = \{\}
+         13     for j in range(0, range\_length):
+    ---> 14         score[i][j] = 0
+         15 
+         16 \# 在处理后的数据中，对每两条数据条目计算差异性得分，分值越高差异性越大
+    
+
+        MemoryError: 
+
+    \end{Verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
